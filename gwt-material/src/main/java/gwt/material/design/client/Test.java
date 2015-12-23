@@ -23,7 +23,10 @@ package gwt.material.design.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
+import gwt.material.design.client.ui.MaterialContainer;
 import gwt.material.design.client.ui.MaterialLabel;
+import gwt.material.design.client.ui.MaterialPager;
+import gwt.material.design.client.ui.MaterialPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -33,8 +36,16 @@ public class Test implements EntryPoint {
 
     public void onModuleLoad() {
 
-        MaterialLabel label = new MaterialLabel("CULO");
-        RootPanel.get().add(label);
+        MaterialContainer panel = new MaterialContainer();
+        panel.setTitle("TEST-PANEL");
+
+        MaterialPager materialPager = new MaterialPager();
+        materialPager.setTotal(1000);
+        materialPager.setGrid("s6");
+
+
+        panel.add(materialPager);
+        RootPanel.get().add(panel);
     }
 
 }

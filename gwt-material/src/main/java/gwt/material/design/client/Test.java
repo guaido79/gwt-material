@@ -22,7 +22,6 @@ package gwt.material.design.client;
 
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.user.client.ui.RootPanel;
 import gwt.material.design.client.ui.*;
 
@@ -36,25 +35,15 @@ public class Test implements EntryPoint {
 
         MaterialContainer panel = new MaterialContainer();
         panel.setTitle("TEST-PANEL");
-
-
-        final MaterialPager materialPager = new MaterialPager();
-        materialPager.setTotal(260);
-        materialPager.setGrid("s12");
-        materialPager.setEnableIndicator(true);
-        materialPager.setIndicatorTemplate("Siamo a pagina {page} di un totale di {total}");
-
-        Scheduler.get().scheduleFixedDelay(new Scheduler.RepeatingCommand() {
-            @Override
-            public boolean execute() {
-                materialPager.setTotal(461);
-                return false;
-            }
-        }, 5000);
+        panel.addStyleName("container");
 
         MaterialRow row = new MaterialRow();
-        row.add(materialPager);
 
+        MaterialPager materialPager = new MaterialPager();
+        materialPager.setTotal(1000);
+        materialPager.setGrid("s12");
+
+        row.add(materialPager);
         panel.add(row);
         RootPanel.get().add(panel);
     }

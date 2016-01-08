@@ -22,6 +22,11 @@ package gwt.material.design.client;
 
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.HasDirection;
 import com.google.gwt.user.client.ui.RootPanel;
 import gwt.material.design.client.ui.*;
@@ -40,7 +45,7 @@ public class Test implements EntryPoint {
 
         MaterialRow row = new MaterialRow();
 
-        MaterialListBox materialListBox = new MaterialListBox();
+        final MaterialListBox materialListBox = new MaterialListBox();
         materialListBox.setPlaceholder("Pippos");
 
         materialListBox.setMultipleSelect(true);
@@ -50,6 +55,13 @@ public class Test implements EntryPoint {
         materialListBox.addItem("A", HasDirection.Direction.DEFAULT, "VALUE A");
         materialListBox.addItem("B", HasDirection.Direction.DEFAULT, "VALUE B");
 
+        materialListBox.addValueChangeHandler(new ValueChangeHandler<String>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<String> event) {
+                GWT.log("BAU " + event.toDebugString());
+                GWT.log("BAU 2 " + materialListBox.getItemsSelected());
+            }
+        });
 
         //materialListBox.setItemSelected(1, true);
         //materialListBox.setItemSelected(2, true);

@@ -22,6 +22,7 @@ package gwt.material.design.client;
 
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.i18n.client.HasDirection;
 import com.google.gwt.user.client.ui.RootPanel;
 import gwt.material.design.client.ui.*;
 
@@ -39,11 +40,24 @@ public class Test implements EntryPoint {
 
         MaterialRow row = new MaterialRow();
 
-        MaterialPager materialPager = new MaterialPager();
-        materialPager.setTotal(1000);
-        materialPager.setGrid("s12");
+        MaterialListBox materialListBox = new MaterialListBox();
+        materialListBox.setPlaceholder("Pippos");
 
-        row.add(materialPager);
+        materialListBox.setMultipleSelect(true);
+        materialListBox.setEmptyPlaceHolder("Seleziona sto pardi");
+
+        materialListBox.addItem("Z", HasDirection.Direction.DEFAULT, "VALUE Z");
+        materialListBox.addItem("A", HasDirection.Direction.DEFAULT, "VALUE A");
+        materialListBox.addItem("B", HasDirection.Direction.DEFAULT, "VALUE B");
+
+
+        //materialListBox.setItemSelected(1, true);
+        //materialListBox.setItemSelected(2, true);
+
+
+        materialListBox.setGrid("s3");
+
+        row.add(materialListBox);
         panel.add(row);
         RootPanel.get().add(panel);
     }

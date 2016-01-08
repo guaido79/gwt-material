@@ -1,4 +1,4 @@
-package gwt.material.design.client.constants;
+package gwt.material.design.client.base;
 
 /*
  * #%L
@@ -20,28 +20,18 @@ package gwt.material.design.client.constants;
  * #L%
  */
 
+import com.google.gwt.dom.client.Style;
 
-import gwt.material.design.client.base.helper.EnumHelper;
+public interface HasFontWeight {
 
-/**
- * Created by Mark Kevin on 11/25/2015.
- */
-public enum AutocompleteType implements CssType {
-    CHIP("autocomplete-chip"),
-    TEXT("autocomplete-text");
+    /**
+     * Sets the font weight
+     * @param fontWeight
+     */
+    void setFontWeight(Style.FontWeight fontWeight);
 
-    private final String cssClass;
-
-    AutocompleteType(final String cssClass) {
-        this.cssClass = cssClass;
-    }
-
-    @Override
-    public String getCssName() {
-        return cssClass;
-    }
-
-    public static AutocompleteType fromStyleName(final String styleName) {
-        return EnumHelper.fromStyleName(styleName, AutocompleteType.class, CHIP);
-    }
+    /**
+     * Get the font weight
+     */
+    String getFontWeight();
 }

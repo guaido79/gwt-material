@@ -1,4 +1,4 @@
-package gwt.material.design.client.constants;
+package gwt.material.design.client.ui;
 
 /*
  * #%L
@@ -20,32 +20,29 @@ package gwt.material.design.client.constants;
  * #L%
  */
 
-import gwt.material.design.client.base.helper.EnumHelper;
+import com.google.gwt.dom.client.Document;
+import gwt.material.design.client.base.MaterialWidget;
+//@formatter:off
 
 /**
+ * Dividers are 1 pixel lines that help break up your content.
+ *
+ * <h3>UiBinder Usage:</h3>
+ * <pre>
+ *{@code
+ *  <m:MaterialTitle title="Title" description="Description"/>
+ *  <m:MaterialDivider />
+ * }
+ * </pre>
+ *
  * @author kevzlou7979
- * @author Ben Dol
+ * @see <a href="http://gwt-material-demo.herokuapp.com/#helper">Material Divider</a>
  */
-public enum SideNavType implements CssType {
-    OPEN("fixed open"),
-    CLOSE("close"),
-    MINI("mini"),
-    CLIP("clip"),
-    FLOAT("clip float"),
-    CARD("clip card");
+//@formatter:on
+public class MaterialDivider extends MaterialWidget {
 
-    private final String cssClass;
-
-    SideNavType(final String cssClass) {
-        this.cssClass = cssClass;
-    }
-
-    @Override
-    public String getCssName() {
-        return cssClass;
-    }
-
-    public static SideNavType fromStyleName(final String styleName) {
-        return EnumHelper.fromStyleName(styleName, SideNavType.class, OPEN);
+    public MaterialDivider() {
+        super(Document.get().createElement("div"));
+        setStyleName("divider");
     }
 }

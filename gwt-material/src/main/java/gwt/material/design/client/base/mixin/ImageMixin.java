@@ -20,32 +20,42 @@ package gwt.material.design.client.base.mixin;
  * #L%
  */
 
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.UIObject;
-import gwt.material.design.client.base.HasShadow;
+import gwt.material.design.client.base.HasColors;
+import gwt.material.design.client.base.HasImage;
 
 /**
- * @author Ben Dol
+ * @author kevzlou7979
  */
-public class ShadowMixin<T extends UIObject & HasShadow> extends AbstractMixin<T> implements HasShadow {
+public class ImageMixin<T extends UIObject & HasImage> extends AbstractMixin<T> implements HasImage {
 
-    private int shadow;
+    private String url = "";
+    private ImageResource resource;
 
-    public ShadowMixin(final T uiObject) {
-        super(uiObject);
+    public ImageMixin(final T widget) {
+        super(widget);
     }
 
     @Override
-    public void setShadow(int shadow) {
-        uiObject.removeStyleName("z-depth-" + this.shadow);
-        this.shadow = shadow;
-
-        if(shadow >= 0) {
-            uiObject.addStyleName("z-depth-" + shadow);
-        }
+    public void setUrl(String url) {
+        this.url = url;
+        uiObject.getElement().setAttribute("src", url);
     }
 
     @Override
-    public int getShadow() {
-        return shadow;
+    public String getUrl() {
+        return url;
+    }
+
+    @Override
+    public void setResource(ImageResource resource) {
+        this.resource = resource;
+        setUrl(resource.getURL());
+    }
+
+    @Override
+    public ImageResource getResource() {
+        return resource;
     }
 }

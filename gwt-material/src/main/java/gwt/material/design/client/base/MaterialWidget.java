@@ -27,38 +27,12 @@ import com.google.gwt.user.client.ui.Focusable;
 import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.Widget;
 import gwt.material.design.client.base.helper.StyleHelper;
-import gwt.material.design.client.base.mixin.ColorsMixin;
-import gwt.material.design.client.base.mixin.CssNameMixin;
-import gwt.material.design.client.base.mixin.EnabledMixin;
-import gwt.material.design.client.base.mixin.FlexboxMixin;
-import gwt.material.design.client.base.mixin.FocusableMixin;
-import gwt.material.design.client.base.mixin.FontSizeMixin;
-import gwt.material.design.client.base.mixin.GridMixin;
-import gwt.material.design.client.base.mixin.IdMixin;
-import gwt.material.design.client.base.mixin.ScrollspyMixin;
-import gwt.material.design.client.base.mixin.SeparatorMixin;
-import gwt.material.design.client.base.mixin.ShadowMixin;
-import gwt.material.design.client.base.mixin.ToggleStyleMixin;
-import gwt.material.design.client.base.mixin.TooltipMixin;
-import gwt.material.design.client.base.mixin.WavesMixin;
-import gwt.material.design.client.constants.CenterOn;
-import gwt.material.design.client.constants.Display;
-import gwt.material.design.client.constants.Flex;
-import gwt.material.design.client.constants.FlexAlignContent;
-import gwt.material.design.client.constants.FlexAlignItems;
-import gwt.material.design.client.constants.FlexAlignSelf;
-import gwt.material.design.client.constants.FlexDirection;
-import gwt.material.design.client.constants.FlexJustifyContent;
-import gwt.material.design.client.constants.FlexWrap;
-import gwt.material.design.client.constants.HideOn;
-import gwt.material.design.client.constants.Position;
-import gwt.material.design.client.constants.ShowOn;
-import gwt.material.design.client.constants.TextAlign;
-import gwt.material.design.client.constants.WavesType;
+import gwt.material.design.client.base.mixin.*;
+import gwt.material.design.client.constants.*;
 
 public class MaterialWidget extends ComplexPanel implements HasId, HasEnabled, HasTextAlign, HasColors, HasGrid,
         HasShadow, Focusable, HasInlineStyle, HasSeparator, HasScrollspy, HasHideOn, HasShowOn, HasCenterOn,
-        HasCircle, HasWaves, HasDataAttributes, HasFloat, HasTooltip, HasFlexbox {
+        HasCircle, HasWaves, HasDataAttributes, HasFloat, HasTooltip, HasFlexbox, HasHoverable, HasFontWeight, HasDepth {
 
     private IdMixin<MaterialWidget> idMixin;
     private EnabledMixin<MaterialWidget> enabledMixin;
@@ -78,6 +52,8 @@ public class MaterialWidget extends ComplexPanel implements HasId, HasEnabled, H
     private CssNameMixin<MaterialWidget, Style.Float> floatMixin;
     private TooltipMixin<MaterialWidget> tooltipMixin;
     private FlexboxMixin<MaterialWidget> flexboxMixin;
+    private ToggleStyleMixin<MaterialWidget> hoverableMixin;
+    private CssNameMixin<MaterialWidget, Style.FontWeight> fontWeightMixin;
 
     public MaterialWidget() {
     }
@@ -171,6 +147,11 @@ public class MaterialWidget extends ComplexPanel implements HasId, HasEnabled, H
         return circleMixin;
     }
 
+    private ToggleStyleMixin<MaterialWidget> getHoverableMixin() {
+        if(hoverableMixin == null) { hoverableMixin = new ToggleStyleMixin<>(this, "hoverable"); }
+        return hoverableMixin;
+    }
+
     private WavesMixin<MaterialWidget> getWavesMixin() {
         if(wavesMixin == null) { wavesMixin = new WavesMixin<>(this); }
         return wavesMixin;
@@ -189,6 +170,11 @@ public class MaterialWidget extends ComplexPanel implements HasId, HasEnabled, H
     private FlexboxMixin<MaterialWidget> getFlexboxMixin() {
         if(flexboxMixin == null) { flexboxMixin = new FlexboxMixin<>(this); }
         return flexboxMixin;
+    }
+
+    private CssNameMixin<MaterialWidget, Style.FontWeight> getFontWeightMixin() {
+        if(fontWeightMixin == null) { fontWeightMixin = new CssNameMixin<>(this); }
+        return fontWeightMixin;
     }
 
     @Override
@@ -573,5 +559,35 @@ public class MaterialWidget extends ComplexPanel implements HasId, HasEnabled, H
 
     public void setBottom(double value) {
         getElement().getStyle().setBottom(value, Style.Unit.PX);
+    }
+
+    @Override
+    public void setHoverable(boolean hoverable) {
+        getHoverableMixin().setOn(hoverable);
+    }
+
+    @Override
+    public boolean isHoverable() {
+        return getHoverableMixin().isOn();
+    }
+
+    @Override
+    public void setFontWeight(Style.FontWeight fontWeight) {
+        getElement().getStyle().setFontWeight(fontWeight);
+    }
+
+    @Override
+    public String getFontWeight() {
+        return getElement().getStyle().getFontWeight();
+    }
+
+    @Override
+    public void setDepth(int depth) {
+        getElement().getStyle().setZIndex(depth);
+    }
+
+    @Override
+    public int getDepth() {
+        return Integer.parseInt(getElement().getStyle().getZIndex());
     }
 }

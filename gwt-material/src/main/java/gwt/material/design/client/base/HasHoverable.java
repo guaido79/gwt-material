@@ -1,4 +1,4 @@
-package gwt.material.design.client.resources;
+package gwt.material.design.client.base;
 
 /*
  * #%L
@@ -20,19 +20,9 @@ package gwt.material.design.client.resources;
  * #L%
  */
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.TextResource;
+public interface HasHoverable {
 
-public interface MaterialDebugResources extends ClientBundle {
-    MaterialDebugResources INSTANCE = GWT.create(MaterialDebugResources.class);
+    void setHoverable(boolean hoverable);
 
-    @Source("js/materialize-0.97.5.js")
-    TextResource materializeJsDebug();
-
-    @Source("js/animation.js")
-    TextResource animationJsDebug();
-
-    @Source("js/shrink.js")
-    TextResource shrinkJsDebug();
+    boolean isHoverable();
 }

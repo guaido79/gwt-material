@@ -23,6 +23,7 @@ package gwt.material.design.client.ui.animate;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Widget;
+import gwt.material.design.client.ui.MaterialToast;
 import gwt.material.design.client.ui.html.ListItem;
 import gwt.material.design.client.ui.html.UnorderedList;
 
@@ -36,7 +37,7 @@ public class MaterialAnimator {
         animate(transition, w, delayMillis, null);
     }
 
-    public static void animate(final Transition transition, final Widget w, int delayMillis, Runnable callback) {
+    public static void animate(final Transition transition, final Widget w, int delayMillis, final Runnable callback) {
         final String name = String.valueOf(DOM.createUniqueId());
         w.getElement().setId(name);
         switch (transition) {
@@ -55,9 +56,6 @@ public class MaterialAnimator {
                 w.getElement().getStyle().setOpacity(0);
                 break;
             default:
-                // For core animation components
-                w.addStyleName("animated " + transition.getCssName());
-
                 break;
         }
 
@@ -80,7 +78,9 @@ public class MaterialAnimator {
                         closeGrid(name);
                         break;
                     default:
-                        w.removeStyleName("animated " + transition.getCssName());
+                        // For core animation components
+                        w.addStyleName("animated " + transition.getCssName());
+                        animationFinishedCallback(name, "animated " + transition.getCssName(), callback);
                         break;
                 }
             }
@@ -90,11 +90,11 @@ public class MaterialAnimator {
     }
 
     protected static native void animationFinishedCallback(String name, String oldClass, Runnable callback) /*-{
-        $wnd.jQuery('#' + name).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-            $wnd.jQuery('#' + name).removeClass(oldClass);
+        $wnd.jQuery('#' +  name).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
             if(callback != null) {
                 callback.@java.lang.Runnable::run()();
             }
+            $wnd.jQuery('#' +  name).removeClass(oldClass);
         });
     }-*/;
 

@@ -92,13 +92,13 @@ public class MaterialPager extends MaterialWidget {
         if (!calcInitialized) {
             calcTotalPages = total / pageSize + (((double) total % (double) pageSize) > 0 ? 1 : 0);
 
-        add(getOrCreateLiElementLeft());
+            add(getOrCreateLiElementLeft());
             moveNextPagesRange();
-        add(getOrCreateLiElementRight());
-        if (enableIndicator) {
-            add(createLiElementIndicator());
-        }
-        onPageSelection(1);
+            add(getOrCreateLiElementRight());
+            if (enableIndicator) {
+                add(createLiElementIndicator());
+            }
+            onPageSelection(1);
 
             calcInitialized = true;
         }
@@ -232,9 +232,9 @@ public class MaterialPager extends MaterialWidget {
             @Override
             public void onPageSelected(PageSelectionEvent event) {
                 indicator.setText(
-                    indicatorTemplate
-                        .replaceAll("\\{page\\}", String.valueOf(event.getPageTo()))
-                        .replaceAll("\\{total\\}", String.valueOf(event.getTotalPage()))
+                        indicatorTemplate
+                                .replaceAll("\\{page\\}", String.valueOf(event.getPageTo()))
+                                .replaceAll("\\{total\\}", String.valueOf(event.getTotalPage()))
                 );
             }
         });
@@ -326,36 +326,6 @@ public class MaterialPager extends MaterialWidget {
 
     public void setMaxPageLinksShown(int maxPageLinksShown) {
         this.maxPageLinksShown = maxPageLinksShown;
-    }
-
-    public String getIndicatorTemplate() {
-        return indicatorTemplate;
-    }
-
-    /**
-     * Set the paging indicator label with a custom template
-     * <ul>
-     * <li><strong>{page}</strong> is the current page</li>
-     * <li><strong>{total}</strong> is the total page</li>
-     * </ul>
-     * Example
-     * <pre>
-     *{@code
-     * Page {page} of {total}
-     * }</pre>
-     *
-     * @param indicatorTemplate
-     */
-    public void setIndicatorTemplate(String indicatorTemplate) {
-        this.indicatorTemplate = indicatorTemplate;
-    }
-
-    static abstract class InsertElementAtPositionCommand implements Scheduler.ScheduledCommand {
-        protected int insertionIndex;
-
-        InsertElementAtPositionCommand(int insertionIndex) {
-            this.insertionIndex = insertionIndex;
-        }
     }
 
     public String getIndicatorTemplate() {
